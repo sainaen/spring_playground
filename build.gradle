@@ -4,7 +4,7 @@ sourceCompatibility = 1.7
 version = '0.0.1'
 
 dependencies {
-    String springVersion = '3.2.0.RELEASE'
+    String springVersion = '3.2.5.RELEASE'
 
     compile "org.springframework:spring-core:${springVersion}",
             "org.springframework:spring-web:${springVersion}",
@@ -16,6 +16,7 @@ dependencies {
 
 repositories {
     mavenCentral()
+    maven { url "http://repo.spring.io/libs-snapshot" }
 }
 
 task wrapper(type: Wrapper) {
