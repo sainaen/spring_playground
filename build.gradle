@@ -2,6 +2,10 @@ task hello << {
     println 'Hello, world!'
 }
 
+task count << {
+    4.times { print "$it " }
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '1.9'
 }
