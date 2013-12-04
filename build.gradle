@@ -6,6 +6,14 @@ task intro(dependsOn: hello) << {
     println "I'm Gradle"
 }
 
+task distribution << {
+    println "Building the zip with version=$version"
+}
+
+task release(dependsOn: "distribution") << {
+    println "Making a release now"
+}
+
 task count << {
     4.times { print "$it " }
 }
@@ -25,6 +33,14 @@ task printTaskProps << {
 }
 
 defaultTasks "intro", "printTaskProps"
+
+gradle.taskGraph.whenReady {taskGraph ->
+    if (taskGraph.hasTask(release)) {
+        version = "1.0.0"
+    } else {
+        version = "1.0.0-SNAPSHOT"
+    }
+}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.9'
