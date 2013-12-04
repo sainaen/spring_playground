@@ -4,12 +4,14 @@ sourceCompatibility = 1.7
 version = '0.0.1'
 
 dependencies {
-    compile 'org.springframework:spring-core:3.2.0.RELEASE',
-            'org.springframework:spring-web:3.2.0.RELEASE',
-            'org.springframework:spring-webmvc:3.2.0.RELEASE',
+    String springVersion = '3.2.0.RELEASE'
+
+    compile "org.springframework:spring-core:${springVersion}",
+            "org.springframework:spring-web:${springVersion}",
+            "org.springframework:spring-webmvc:${springVersion}",
             'javax.servlet:servlet-api:2.5'
     testCompile 'junit:junit:4.11',
-            'org.springframework:spring-test:3.2.0.RELEASE'
+            "org.springframework:spring-test:${springVersion}"
 }
 
 repositories {
