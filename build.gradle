@@ -1,46 +1,4 @@
-task hello << {
-    println 'Hello, world!'
-}
-
-task intro(dependsOn: hello) << {
-    println "I'm Gradle"
-}
-
-task distribution << {
-    println "Building the zip with version=$version"
-}
-
-task release(dependsOn: "distribution") << {
-    println "Making a release now"
-}
-
-task count << {
-    4.times { print "$it " }
-}
-
-4.times { counter ->
-    task "task$counter" << {
-        println "I'm task number $counter"
-    }
-}
-
-task me {
-    ext.myName = "sainaen"
-}
-
-task printTaskProps << {
-    println "Your name is ${me.myName}"
-}
-
-defaultTasks "intro", "printTaskProps"
-
-gradle.taskGraph.whenReady {taskGraph ->
-    if (taskGraph.hasTask(release)) {
-        version = "1.0.0"
-    } else {
-        version = "1.0.0-SNAPSHOT"
-    }
-}
+apply plugin: 'java'
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.9'
