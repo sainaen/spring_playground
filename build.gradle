@@ -3,11 +3,16 @@ apply plugin: 'war'
 apply plugin: 'jetty'
 
 sourceCompatibility = 1.7
+targetCompatibility = 1.7
 version = '0.0.1'
 
-dependencies {
-    String springVersion = '3.2.5.RELEASE'
+ext {
+    springVersion = "3.2.5.RELEASE"
+}
 
+defaultTasks 'build'
+
+dependencies {
     compile "org.springframework:spring-core:${springVersion}",
             "org.springframework:spring-web:${springVersion}",
             "org.springframework:spring-webmvc:${springVersion}",
