@@ -1,23 +1,23 @@
-apply plugin: 'java'
-apply plugin: 'war'
-apply plugin: 'jetty'
+apply plugin: "java"
+apply plugin: "war"
+apply plugin: "jetty"
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
-version = '0.0.1'
+version = "0.0.1"
 
 ext {
     springVersion = "3.2.5.RELEASE"
 }
 
-defaultTasks 'build'
+defaultTasks "build"
 
 dependencies {
     compile "org.springframework:spring-core:${springVersion}",
             "org.springframework:spring-web:${springVersion}",
             "org.springframework:spring-webmvc:${springVersion}",
-            'javax.servlet:servlet-api:2.5'
-    testCompile 'junit:junit:4.11',
+            "javax.servlet:servlet-api:2.5"
+    testCompile "junit:junit:4.11",
             "org.springframework:spring-test:${springVersion}"
 }
 
@@ -27,5 +27,5 @@ repositories {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.9'
+    gradleVersion = "1.9"
 }
