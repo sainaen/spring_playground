@@ -1,4 +1,5 @@
 apply plugin: "java"
+apply plugin: "groovy"
 apply plugin: "war"
 apply plugin: "jetty"
 
@@ -17,13 +18,17 @@ dependencies {
             "org.springframework:spring-web:${springVersion}",
             "org.springframework:spring-webmvc:${springVersion}",
             "javax.servlet:servlet-api:2.5"
+
     testCompile "junit:junit:4.11",
+            "org.spockframework:spock-core:1.0-groovy-2.0-SNAPSHOT",
+            "org.spockframework:spock-spring:1.0-groovy-2.0-SNAPSHOT",
             "org.springframework:spring-test:${springVersion}"
 }
 
 repositories {
     mavenCentral()
     maven { url "http://repo.spring.io/libs-snapshot" }
+    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 task wrapper(type: Wrapper) {
