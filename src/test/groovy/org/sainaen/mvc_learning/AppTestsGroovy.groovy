@@ -6,11 +6,11 @@ import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.web.WebAppConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.web.context.WebApplicationContext
-import spock.lang.Ignore
 import spock.lang.Specification
 
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup
 
 @WebAppConfiguration
 @ContextConfiguration("file:src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml")
@@ -23,7 +23,7 @@ class AppTestsGroovy extends Specification {
         mockMvc = webAppContextSetup(wac).build()
     }
 
-    def "should greet the world"() {
+    def "should greet the world if there's no name passed"() {
         when: "request sent"
         def result = mockMvc.perform(get("/")).andReturn()
 
@@ -39,5 +39,19 @@ class AppTestsGroovy extends Specification {
 
         and: "response should have status 200 OK"
         response.getStatus() == HttpStatus.OK.value()
+    }
+
+    def "should send greeting with the name from the request"() {
+        when: "request sent"
+        def request = mockMvc.perform(get("/").param("name", "Name"))
+
+        then:
+        request.andExpect(status().isOk())
+        and:
+        request.andExpect(model().attribute("message", "Hello, Name!"))
+        and:
+        request.andExpect(view().name("hello"))
+        and:
+        request.andExpect(forwardedUrl("/WEB-INF/pages/hello.jsp"))
     }
 }
